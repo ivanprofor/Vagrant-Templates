@@ -14,16 +14,16 @@ Vagrant.configure('2') do |config|
   config.vm.usable_port_range = 2201..8999
   
   # The "id: "ssh"" parameter overrides the default ssh port on the host machine
-  config.vm.network "forwarded_port", guest: 22, host: 2202, auto_correct: true, id: "ssh"
+  config.vm.network "forwarded_port", guest: 22, host: 2203, auto_correct: true, id: "ssh"
 
   config.vm.synced_folder "~/Drives/Vagrant", "/vagrant_data", owner: "vagrant", group: "vagrant"
-  config.vm.network "forwarded_port", guest: 80, host: 8002, auto_correct: true
+  config.vm.network "forwarded_port", guest: 80, host: 8003, auto_correct: true
   # config.vm.network "private_network", type: "dhcp"
 
   # this configuration is indicated as a second network interface
   config.vm.network "private_network", :type => 'dhcp', :name => 'vboxnet2', :adapter => 3
   
-  config.vm.network "private_network", ip: "10.205.205.2"
+  config.vm.network "private_network", ip: "10.205.205.3"
 
   # config.vm.network "public_network", bridge: 'wlp1s0'
 
@@ -47,7 +47,7 @@ Vagrant.configure('2') do |config|
     vbox.cpus = 1
     # vbox.gui = true
     vbox.customize ["modifyvm", :id, "--groups", "/Vagrant"]
-    vbox.customize ["modifyvm", :id, "--vram", "3"]
+    vbox.customize ["modifyvm", :id, "--vram", "9"]
     vbox.customize ["modifyvm", :id, "--description", "This is an Ubuntu 20.04 machine"]
     vbox.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     
