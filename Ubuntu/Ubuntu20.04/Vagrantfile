@@ -16,7 +16,7 @@ Vagrant.configure('2') do |config|
   # The "id: "ssh"" parameter overrides the default ssh port on the host machine
   config.vm.network "forwarded_port", guest: 22, host: 2203, auto_correct: true, id: "ssh"
 
-  config.vm.synced_folder "~/Drives/Vagrant", "/vagrant_data", owner: "vagrant", group: "vagrant"
+  config.vm.synced_folder "~/Drives/Vagrant", "/vagrant_data", owner: "vagrant", group: "vagrant", automount: true
   config.vm.network "forwarded_port", guest: 80, host: 8003, auto_correct: true
   # config.vm.network "private_network", type: "dhcp"
 
