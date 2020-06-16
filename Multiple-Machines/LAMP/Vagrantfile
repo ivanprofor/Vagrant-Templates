@@ -35,7 +35,7 @@ Vagrant.configure("2") do |config|
         apache.vm.hostname = 'apache'
         # apache.vm.box_url = "ubuntu/xenial64"
     
-        apache.vm.synced_folder "~/Drives/Vagrant", "/vagrant_data", owner: "vagrant", group: "vagrant", automount: true
+        apache.vm.synced_folder "~/Projects/ghub/dirigio/dev.dirigio.it/", "/var/www/html", owner: "vagrant", group: "vagrant", automount: true, create: true
 
         apache.vm.network "private_network", ip: "10.205.205.15"
         apache.vm.network "forwarded_port", guest: 22, host: 2215, auto_correct: true, id: "ssh"
@@ -61,13 +61,13 @@ Vagrant.configure("2") do |config|
         # config.vm.provision "shell", path: "provision.sh"
         apache.vm.provision "shell", inline: <<-SHELL
         export DEBIAN_FRONTEND=noninteractive
-        apt -y update &&\
-        apt -y upgrade &&\
-        apt -y dist-upgrade &&\
+        apt-get -y update &&\
+        apt-get -y upgrade &&\
+        apt-get -y dist-upgrade &&\
         # General CLI installation
-        apt -yf install whois mc curl htop glances &&\
+        apt-get -yf install whois mc curl htop glances &&\
         # Specific to this machine software installation
-        apt -yf install apache
+        apt-get -yf install apache2
         # Do not reboot from inside the machine because after the reboot the shared folders are not mounted. To mount them afterwards one's should "vagrant halt" and "vagrant up" from the host machine.
         # reboot
         SHELL
@@ -80,7 +80,7 @@ Vagrant.configure("2") do |config|
         mysql.vm.hostname = 'mysql'
         # mysql.vm.box_url = "ubuntu/xenial64"
     
-        mysql.vm.synced_folder "~/Drives/Vagrant", "/vagrant_data", owner: "vagrant", group: "vagrant", automount: true
+        mysql.vm.synced_folder "~/Drives/Vagrant", "/vagrant_data", owner: "vagrant", group: "vagrant", automount: true, create: true
 
         mysql.vm.network "private_network", ip: "10.205.205.16"
         mysql.vm.network "forwarded_port", guest: 22, host: 2216, auto_correct: true, id: "ssh"
@@ -106,13 +106,13 @@ Vagrant.configure("2") do |config|
         # config.vm.provision "shell", path: "provision.sh"
         mysql.vm.provision "shell", inline: <<-SHELL
         export DEBIAN_FRONTEND=noninteractive
-        apt -y update &&\
-        apt -y upgrade &&\
-        apt -y dist-upgrade &&\
+        apt-get -y update &&\
+        apt-get -y upgrade &&\
+        apt-get -y dist-upgrade &&\
         # General CLI installation
-        apt -yf install whois mc curl htop glances &&\
+        apt-get -yf install whois mc curl htop glances &&\
         # Specific to this machine software installation
-        apt -yf install mysql-server
+        apt-get -yf install mysql-server
         # Do not reboot from inside the machine because after the reboot the shared folders are not mounted. To mount them afterwards one's should "vagrant halt" and "vagrant up" from the host machine.
         # reboot
         SHELL
